@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tetris</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="game-container">
+    <header class="header">
+      <h1 class="title">TETRIS</h1>
+      <div class="score-panel">
+        <div class="stat">
+          <span class="stat-label">낙하 속도</span>
+          <span id="drop-speed" class="stat-value">100%</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">점수</span>
+          <span id="score" class="stat-value">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">레벨</span>
+          <span id="level" class="stat-value">1</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">라인</span>
+          <span id="lines" class="stat-value">0</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="game-area">
+      <aside class="scoreboard-panel">
+        <div id="my-stats" class="my-stats hidden">
+          <div class="my-stat-row"><span class="my-stat-label">내 최고 기록</span><span id="my-best-score" class="my-stat-value">0</span></div>
+          <div class="my-stat-row"><span class="my-stat-label">현재 순위</span><span id="my-rank" class="my-stat-value">-</span></div>
+        </div>
+        <span class="panel-label">최고 기록 TOP 10</span>
+        <ol id="scoreboard-list" class="scoreboard-list"></ol>
+      </aside>
+      <div class="board-wrapper">
+        <canvas id="game-board" width="360" height="720"></canvas>
+        <div id="game-over-overlay" class="overlay hidden">
+          <div class="overlay-content">
+            <h2>GAME OVER</h2>
+            <p id="final-score">점수: 0</p>
+            <button id="restart-btn" class="btn">다시 시작</button>
+          </div>
+        </div>
+        <div id="start-overlay" class="overlay">
+          <div class="overlay-content">
+            <h2>TETRIS</h2>
+            <p class="controls-hint">방향키: 이동 / 위: 회전 / 스페이스: 하드 드롭</p>
+            <button id="start-btn" class="btn">시작</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="side-panel">
+        <div class="next-piece-box">
+          <span class="panel-label">다음 블록</span>
+          <canvas id="next-canvas" width="120" height="120"></canvas>
+        </div>
+        <div class="controls-box">
+          <span class="panel-label">조작법</span>
+          <ul class="controls-list">
+            <li>← → : 좌우 이동</li>
+            <li>↓ : 빠르게 내리기</li>
+            <li>↑ : 회전</li>
+            <li>스페이스: 즉시 낙하 (착지 후 좌/우 이동 가능)</li>
+            <li>P : 일시정지</li>
+          </ul>
+        </div>
+        <div id="auth-area" class="auth-area auth-area-side">
+          <button id="google-login-btn" class="btn btn-google">Google로 로그인</button>
+          <div id="auth-user-area" class="auth-user-area hidden">
+            <span id="auth-user-name" class="auth-user-name"></span>
+            <button id="logout-btn" class="btn btn-outline">로그아웃</button>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

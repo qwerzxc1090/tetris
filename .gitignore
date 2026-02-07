@@ -1,0 +1,4 @@
+# 환경 변수 (비공개 키 포함)
+.env
+.env.local
+.env.*.local
