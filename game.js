@@ -1,9 +1,58 @@
 (function () {
   'use strict';
 
-  const COLS = 9;
-  const ROWS = 16;
-  const BLOCK_SIZE = 30;
+  const canvas = document.getElementById('game-board');
+  const ctx = canvas.getContext('2d');
+  const nextCanvas = document.getElementById('next-canvas');
+  const nextCtx = nextCanvas.getContext('2d');
+
+  // ---------------------------------------------------------------------------
+  // 게임 설정: PC / 모바일 분리 (난이도 밸런스)
+  // ---------------------------------------------------------------------------
+  const GAME_CONFIG = {
+    pc: {
+      cols: 12,
+      rows: 20,
+      blockSize: 30,
+      baseDropIntervalMs: 1000,
+      levelDropFasterMs: 80,
+      pointsPerSpeedStep: 10,
+      speedIncreasePercentPerStep: 2,
+    },
+    mobile: {
+      cols: 9,
+      rows: 16,
+      blockSize: 30,
+      baseDropIntervalMs: 1200,
+      levelDropFasterMs: 70,
+      pointsPerSpeedStep: 30,
+      speedIncreasePercentPerStep: 1,
+    },
+  };
+
+  const MIN_DROP_INTERVAL_MS = 100;
+
+  let COLS, ROWS, BLOCK_SIZE, BASE_DROP_INTERVAL_MS, LEVEL_DROP_FASTER_MS;
+  let POINTS_PER_SPEED_STEP, SPEED_INCREASE_PERCENT_PER_STEP;
+
+  function isMobile() {
+    return window.innerWidth <= 768 ||
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
+
+  function applyConfig() {
+    const c = isMobile() ? GAME_CONFIG.mobile : GAME_CONFIG.pc;
+    COLS = c.cols;
+    ROWS = c.rows;
+    BLOCK_SIZE = c.blockSize;
+    BASE_DROP_INTERVAL_MS = c.baseDropIntervalMs;
+    LEVEL_DROP_FASTER_MS = c.levelDropFasterMs;
+    POINTS_PER_SPEED_STEP = c.pointsPerSpeedStep;
+    SPEED_INCREASE_PERCENT_PER_STEP = c.speedIncreasePercentPerStep;
+    canvas.width = COLS * BLOCK_SIZE;
+    canvas.height = ROWS * BLOCK_SIZE;
+  }
+
   const COLORS = [
     null,
     '#00f5ff', // I - cyan
@@ -26,11 +75,6 @@
     [[0, 0, 7], [7, 7, 7], [0, 0, 0]],                         // L
   ];
 
-  const canvas = document.getElementById('game-board');
-  const ctx = canvas.getContext('2d');
-  const nextCanvas = document.getElementById('next-canvas');
-  const nextCtx = nextCanvas.getContext('2d');
-
   let board = [];
   let currentPiece = null;
   let nextPiece = null;
@@ -48,12 +92,7 @@
   let gameOverLockUntil = 0;
   const GAME_OVER_LOCK_MS = 1000;
 
-  // 아무 입력 없을 때의 자동 낙하 속도만 증가 (유저 컨트롤(↓ 등)과 무관)
-  const BASE_DROP_INTERVAL_MS = 1000;
-  const MIN_DROP_INTERVAL_MS = 100;
-  const LEVEL_DROP_FASTER_MS = 80;
-  const POINTS_PER_SPEED_STEP = 10;
-  const SPEED_INCREASE_PERCENT_PER_STEP = 2; // 10점당 2%, 시작 100%
+  // 자동 낙하 속도·점수 기반 속도: applyConfig()에서 PC/모바일별 설정 적용
 
   function getDropSpeedPercent() {
     return 100 + Math.floor(score / POINTS_PER_SPEED_STEP) * SPEED_INCREASE_PERCENT_PER_STEP;
@@ -715,5 +754,9 @@
   initAuth().then(() => {
     fetchTop10();
   });
+
+  // 기기 감지 후 설정 적용, 보드·캔버스 초기화 후 첫 그리기
+  applyConfig();
+  board = createBoard();
   drawBoard();
 })();
