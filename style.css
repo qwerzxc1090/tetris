@@ -476,9 +476,9 @@ body {
     padding: 6px;
   }
 
-  /* 3) 캔버스: 비율(300:540 = 10:18) 유지하며 영역 안에 맞춤 */
+  /* 3) 캔버스: 비율(270:480 = 9:16) 유지하며 영역 안에 맞춤 */
   #game-board {
-    aspect-ratio: 300 / 540;
+    aspect-ratio: 270 / 480;
     max-width: 100%;
     max-height: 100%;
     width: auto !important;

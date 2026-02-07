@@ -1,8 +1,8 @@
 (function () {
   'use strict';
 
-  const COLS = 10;
-  const ROWS = 18;
+  const COLS = 9;
+  const ROWS = 16;
   const BLOCK_SIZE = 30;
   const COLORS = [
     null,
