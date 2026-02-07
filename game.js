@@ -59,6 +59,15 @@
     return 100 + Math.floor(score / POINTS_PER_SPEED_STEP) * SPEED_INCREASE_PERCENT_PER_STEP;
   }
 
+  // 낙하 속도 % → 구간별 텍스트 (UI 표시용)
+  function getDropSpeedLabel(percent) {
+    if (percent >= 1300) return '극한';
+    if (percent >= 1000) return '초고속';
+    if (percent >= 700) return '고속';
+    if (percent >= 400) return '빠름';
+    return '보통'; // 100 ~ 399
+  }
+
   // 자동 낙하(키 입력 없을 때): 낙하 속도 %가 올라가면 인터벌이 줄어들어 블록이 더 빨리 내려옴
   function getDropInterval() {
     const baseByLevel = Math.max(MIN_DROP_INTERVAL_MS, BASE_DROP_INTERVAL_MS - (level - 1) * LEVEL_DROP_FASTER_MS);
@@ -485,7 +494,7 @@
   }
 
   function updateUI() {
-    dropSpeedEl.textContent = getDropSpeedPercent() + '%';
+    dropSpeedEl.textContent = getDropSpeedLabel(getDropSpeedPercent());
     scoreEl.textContent = score;
     levelEl.textContent = level;
     linesEl.textContent = lines;

@@ -13,7 +13,7 @@ window.TETRIS_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3Mi
 // 1) 승인된 JavaScript 원본 (브라우저 요청에 사용)
 //    - 로컬: 파일 직접 열기 시에는 file:// 은 사용 불가. 로컬 서버 주소를 넣으세요.
 //    - 예: http://localhost:5500 (Live Server), http://127.0.0.1:5500, 또는 배포 URL (https://...)
-window.TETRIS_GOOGLE_ORIGIN = 'http://localhost:5500';
+window.TETRIS_GOOGLE_ORIGIN = 'https://tetris-five-pi.vercel.app';
 
 // 2) 승인된 리디렉션 URI (웹 서버 요청에 사용) — Supabase 고정값, 변경하지 마세요.
 //    Google 콘솔에 넣을 값 예: https://hnsmekxijiugrygwjmfb.supabase.co/auth/v1/callback
