@@ -11,7 +11,7 @@
   // ---------------------------------------------------------------------------
   const GAME_CONFIG = {
     pc: {
-      cols: 12,
+      cols: 10,
       rows: 20,
       blockSize: 30,
       baseDropIntervalMs: 1000,
