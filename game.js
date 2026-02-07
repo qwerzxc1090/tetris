@@ -25,7 +25,7 @@
       blockSize: 30,
       baseDropIntervalMs: 1200,
       levelDropFasterMs: 70,
-      pointsPerSpeedStep: 30,
+      pointsPerSpeedStep: 60,
       speedIncreasePercentPerStep: 1,
     },
   };
