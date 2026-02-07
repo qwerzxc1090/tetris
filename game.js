@@ -1,8 +1,8 @@
 (function () {
   'use strict';
 
-  const COLS = 12;  // 좌우 1칸씩 증가 (10→12)
-  const ROWS = 24;  // 상하 2칸씩 증가 (20→24)
+  const COLS = 10;
+  const ROWS = 18;
   const BLOCK_SIZE = 30;
   const COLORS = [
     null,
