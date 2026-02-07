@@ -683,6 +683,35 @@
     }
   });
 
+  /* 모바일 가상 컨트롤러: 터치 시 키보드와 동일한 keydown 디스패치 (기존 리스너 재사용, 멀티 터치 지원) */
+  (function initVirtualController() {
+    const controller = document.getElementById('virtual-controller');
+    if (!controller) return;
+
+    controller.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
+    controller.addEventListener('contextmenu', (e) => e.preventDefault());
+
+    const dispatchKey = (code) => {
+      const key = code === 'Space' ? ' ' : code;
+      document.dispatchEvent(new KeyboardEvent('keydown', { code, key, bubbles: true }));
+    };
+
+    controller.querySelectorAll('.virtual-btn').forEach((btn) => {
+      const code = btn.getAttribute('data-key');
+      if (!code) return;
+
+      btn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        dispatchKey(code);
+      }, { passive: false });
+
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        dispatchKey(code);
+      });
+    });
+  })();
+
   initAuth().then(() => {
     fetchTop10();
   });

@@ -85,6 +85,22 @@
       </aside>
     </main>
   </div>
+
+  <!-- 모바일용 가상 컨트롤러 (768px 이하에서만 표시) -->
+  <div class="virtual-controller" id="virtual-controller" aria-hidden="true">
+    <div class="virtual-controller-left">
+      <button type="button" class="virtual-btn virtual-btn-up" data-key="ArrowUp" title="회전">↑</button>
+      <div class="virtual-controller-row">
+        <button type="button" class="virtual-btn virtual-btn-left" data-key="ArrowLeft" title="왼쪽">←</button>
+        <button type="button" class="virtual-btn virtual-btn-down" data-key="ArrowDown" title="아래">↓</button>
+        <button type="button" class="virtual-btn virtual-btn-right" data-key="ArrowRight" title="오른쪽">→</button>
+      </div>
+    </div>
+    <div class="virtual-controller-right">
+      <button type="button" class="virtual-btn virtual-btn-action" data-key="Space" title="즉시 낙하">▼</button>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
   <script src="game.js"></script>

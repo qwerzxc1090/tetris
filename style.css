@@ -423,3 +423,89 @@ body {
     height: 80px;
   }
 }
+
+/* ========== 가상 컨트롤러 (모바일 전용) ========== */
+.virtual-controller {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .virtual-controller {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 1.5rem 1.5rem;
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  .virtual-controller > * {
+    pointer-events: auto;
+  }
+
+  .virtual-controller-left,
+  .virtual-controller-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .virtual-controller-left {
+    flex-direction: column;
+  }
+
+  .virtual-controller-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .virtual-btn {
+    width: 3.5rem;
+    height: 3.5rem;
+    min-width: 3.5rem;
+    min-height: 3.5rem;
+    border: none;
+    border-radius: 12px;
+    background: rgba(26, 26, 36, 0.85);
+    color: var(--accent-cyan);
+    font-size: 1.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 245, 255, 0.2);
+    transition: background 0.1s, transform 0.1s;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .virtual-btn:active {
+    background: rgba(0, 245, 255, 0.25);
+    transform: scale(0.95);
+  }
+
+  .virtual-btn-action {
+    width: 4.5rem;
+    height: 4.5rem;
+    min-width: 4.5rem;
+    min-height: 4.5rem;
+    font-size: 1.75rem;
+    background: rgba(191, 95, 255, 0.2);
+    color: var(--accent-purple);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(191, 95, 255, 0.3);
+  }
+
+  .virtual-btn-action:active {
+    background: rgba(191, 95, 255, 0.4);
+  }
+}
